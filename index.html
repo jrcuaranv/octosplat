@@ -1,16 +1,256 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Active Gaussian Splatting Mapping</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OctoSplat: Hybrid OctoMap-Gaussian Splatting for Active Semantic Mapping and Phenotyping in Horticulture</title>
+<meta name="description" content="OctoSplat: Hybrid OctoMap-Gaussian Splatting for Active Semantic Mapping and Phenotyping in Horticulture">
+<style>
+  :root {
+    --text: #1a1a1a;
+    --muted: #5a5a5a;
+    --bg: #ffffff;
+    --accent: #2a5db0;
+    --border: #e3e3e3;
+    --panel: #f7f7f8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 64px 24px 48px;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  h1.title {
+    font-size: 1.9rem;
+    line-height: 1.35;
+    font-weight: 700;
+    margin: 0 0 20px;
+    color: #111;
+  }
+  .authors {
+    font-size: 1.05rem;
+    margin-bottom: 6px;
+  }
+  .authors a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .authors a:hover {
+    text-decoration: underline;
+  }
+  .affiliation {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+  }
+  .links {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 20px;
+    border-radius: 24px;
+    border: 1px solid var(--text);
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 600;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .btn:hover {
+    background: var(--text);
+    color: #fff;
+  }
+  .btn.disabled {
+    opacity: 0.45;
+    border-color: var(--muted);
+    color: var(--muted);
+    pointer-events: none;
+  }
+  section {
+    margin: 52px 0;
+  }
+  h2.section-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+    color: #111;
+  }
+  .abstract {
+    font-size: 1rem;
+    color: #222;
+    text-align: justify;
+  }
+  figure {
+    margin: 0 0 36px;
+    text-align: center;
+  }
+  figure:last-child { margin-bottom: 0; }
+  figure img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--panel);
+  }
+  figcaption {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: var(--muted);
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .video-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 640px) {
+    .video-grid { grid-template-columns: 1fr; }
+    h1.title { font-size: 1.5rem; }
+  }
+  .video-card { text-align: center; }
+  .video-card video {
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: #000;
+  }
+  .video-card figcaption {
+    font-weight: 600;
+    color: #333;
+  }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+</style>
 </head>
-
 <body>
 
-<h1>OctoSplat: Hybrid OctoMap-Gaussian Splatting for Active Semantic Mapping and Phenotyping in Horticulture</h1>
+<div class="container">
 
-<p>
-Project page coming soon.
-</p>
+  <header>
+    <h1 class="title">OctoSplat: Hybrid OctoMap-Gaussian Splatting for Active Semantic Mapping and Phenotyping in Horticulture</h1>
+
+    <div class="authors">
+      <a href="https://jrcuaranv.github.io/" target="_blank" rel="noopener">Jose Cuaran</a>,
+      Naveen K. Uppalapati,
+      Girish Chowdhary
+    </div>
+    <div class="affiliation">
+      Siebel School of Computing and Data Science, University of Illinois Urbana-Champaign
+    </div>
+
+    <div class="links">
+      <!-- TODO: replace with public preprint link when available -->
+      <a class="btn disabled" href="#">📄 Paper (coming soon)</a>
+      <a class="btn" href="https://github.com/jrcuaranv/octosplat" target="_blank" rel="noopener">💻 Code</a>
+    </div>
+  </header>
+
+  <section id="abstract">
+    <h2 class="section-title">Abstract</h2>
+    <p class="abstract">
+      Semantic reconstruction of agricultural scenes plays a vital role in tasks such as phenotyping and
+      yield estimation. However, traditional approaches that rely on manual scanning or fixed camera setups
+      remain a major bottleneck in this process. In this work, we propose an active 3D reconstruction
+      framework for horticultural environments using a mobile manipulator. The proposed system integrates
+      the classical OctoMap representation with 3D Gaussian Splatting to enable accurate and efficient
+      target-aware mapping. While a low-resolution OctoMap provides probabilistic occupancy information for
+      informative viewpoint selection and collision-free planning, 3D Gaussian Splatting leverages
+      geometric, photometric, and semantic information to optimize a set of 3D Gaussians for high-fidelity
+      scene reconstruction. We further introduce a robust mapping strategy that mitigates the effects of
+      semantic segmentation and depth noise, together with a background pruning method that reduces memory
+      consumption and computational cost. Extensive experiments in simulation, a controlled laboratory
+      environment, and a real greenhouse demonstrate the practical applicability of our framework. In
+      simulation, where ground-truth geometry is available, our approach outperforms occupancy-based mapping
+      in both reconstruction accuracy and runtime efficiency: compared to a 0.01 m-resolution OctoMap, our
+      method doubles the fruit-level F1 score under noisy conditions while achieving up to a threefold
+      reduction in runtime. Finally, the reconstructed semantic maps enable fruit counting and volume
+      estimation with accuracies approaching 80%.
+    </p>
+  </section>
+
+  <section id="method">
+    <h2 class="section-title">Method</h2>
+    <figure>
+      <img src="figures/system_overview.png" alt="OctoSplat system overview diagram">
+      <figcaption>
+        <strong>System overview.</strong> A semantic extractor produces RGB-D segmentation masks that feed a
+        low-resolution OctoMap and a semantic 3D Gaussian Splatting representation. Candidate viewpoints are
+        sampled, filtered, and evaluated using the OctoMap and prior knowledge of the row layout and plant
+        height, then a graph-based planner selects the best viewpoints for the mobile manipulator to execute,
+        closing the active mapping loop.
+      </figcaption>
+    </figure>
+  </section>
+
+  <section id="results">
+    <h2 class="section-title">Results</h2>
+    <figure>
+      <img src="figures/octomap_vs_ours.png" alt="Comparison of OctoSplat reconstructions against Semantic OctoMap under noiseless, segmentation noise, and segmentation plus depth noise conditions">
+      <figcaption>
+        <strong>Reconstruction quality vs. Semantic OctoMap.</strong> Under noiseless conditions and under
+        segmentation and depth noise, our approach (left) preserves fine-grained plant and fruit geometry,
+        while the 0.01 m-resolution Semantic OctoMap baseline (right) degrades substantially as noise
+        increases.
+      </figcaption>
+    </figure>
+  </section>
+
+  <section id="videos">
+    <h2 class="section-title">Videos</h2>
+    <div class="video-grid">
+      <div class="video-card">
+        <video controls preload="metadata" src="videos/sim_sgs_g1_row3_ours.mp4"></video>
+        <figcaption>Active mapping in simulation</figcaption>
+      </div>
+      <div class="video-card">
+        <video controls preload="metadata" src="videos/lab_sgs_scene7_ours_v2.mp4"></video>
+        <figcaption>Active mapping in a controlled laboratory environment</figcaption>
+      </div>
+      <div class="video-card">
+        <video controls preload="metadata" src="videos/real_sgs_scene1_ours.mp4"></video>
+        <figcaption>Active mapping in a real greenhouse — Scene 1</figcaption>
+      </div>
+      <div class="video-card">
+        <video controls preload="metadata" src="videos/real_sgs_scene6_ours_v2.mp4"></video>
+        <figcaption>Active mapping in a real greenhouse — Scene 6</figcaption>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 Jose Cuaran, Naveen K. Uppalapati, Girish Chowdhary — University of Illinois Urbana-Champaign
+  </footer>
+
+</div>
 
 </body>
 </html>
