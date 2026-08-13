@@ -156,7 +156,7 @@
 <div class="container">
 
   <header>
-    <h1 class="title">OctoSplat: Hybrid OctoMap-Gaussian Splatting for Active Semantic Mapping and Phenotyping in Horticulture</h1>
+    <h1 class="title">OctoSplat: Hybrid OctoMap-Gaussian Splatting for Active Semantic Mapping and Phenotyping with Horticultural Robots</h1>
 
     <div class="authors">
       <a href="https://jrcuaranv.github.io/" target="_blank" rel="noopener">Jose Cuaran</a>,
@@ -177,23 +177,7 @@
   <section id="abstract">
     <h2 class="section-title">Abstract</h2>
     <p class="abstract">
-      Semantic reconstruction of agricultural scenes plays a vital role in tasks such as phenotyping and
-      yield estimation. However, traditional approaches that rely on manual scanning or fixed camera setups
-      remain a major bottleneck in this process. In this work, we propose an active 3D reconstruction
-      framework for horticultural environments using a mobile manipulator. The proposed system integrates
-      the classical OctoMap representation with 3D Gaussian Splatting to enable accurate and efficient
-      target-aware mapping. While a low-resolution OctoMap provides probabilistic occupancy information for
-      informative viewpoint selection and collision-free planning, 3D Gaussian Splatting leverages
-      geometric, photometric, and semantic information to optimize a set of 3D Gaussians for high-fidelity
-      scene reconstruction. We further introduce a robust mapping strategy that mitigates the effects of
-      semantic segmentation and depth noise, together with a background pruning method that reduces memory
-      consumption and computational cost. Extensive experiments in simulation, a controlled laboratory
-      environment, and a real greenhouse demonstrate the practical applicability of our framework. In
-      simulation, where ground-truth geometry is available, our approach outperforms occupancy-based mapping
-      in both reconstruction accuracy and runtime efficiency: compared to a 0.01 m-resolution OctoMap, our
-      method doubles the fruit-level F1 score under noisy conditions while achieving up to a threefold
-      reduction in runtime. Finally, the reconstructed semantic maps enable fruit counting and volume
-      estimation with accuracies approaching 80%.
+      Semantic reconstruction of agricultural scenes plays a vital role in tasks such as phenotyping and yield estimation. However, traditional approaches that rely on manual scanning or fixed camera setups remain a major bottleneck in this process, and existing active-mapping methods based solely on occupancy grids are too coarse to support accurate trait estimation. To close this gap, we propose an active 3D reconstruction framework for horticultural environments using a mobile manipulator. The proposed system integrates the classical OctoMap representation with 3D Gaussian Splatting to enable accurate and efficient target-aware mapping. While a low-resolution OctoMap provides probabilistic occupancy information for informative viewpoint selection and collision-free planning, 3D Gaussian Splatting leverages geometric, photometric, and semantic information to optimize a set of 3D Gaussians for high-fidelity scene reconstruction. We further introduce a robust mapping strategy that mitigates the effects of semantic segmentation and depth noise, together with a background pruning method that reduces memory consumption and computational cost. We validate our framework across simulated, laboratory, and real greenhouse scenes, and show that the improvements hold consistently across three state-of-the-art Gaussian Splatting backbones. In simulation, where ground-truth geometry is available, our approach outperforms occupancy-based mapping in both reconstruction accuracy and runtime efficiency: compared with a 0.01m-resolution OctoMap, our method doubles the fruit-level F1 score under noisy conditions while achieving up to a threefold reduction in runtime. Beyond simulation, novel-view synthesis quality also improves consistently in the laboratory and real greenhouse environments, with PSNR and mIoU improving by up to 1.5 dB and 18% respectively. Finally, the reconstructed semantic maps enable fruit counting and volume estimation with accuracies approaching 80%.
     </p>
   </section>
 
@@ -202,17 +186,20 @@
     <figure>
       <img src="figures/system_overview.png" alt="OctoSplat system overview diagram">
       <figcaption>
-        <strong>System overview.</strong> A semantic extractor produces RGB-D segmentation masks that feed a
-        low-resolution OctoMap and a semantic 3D Gaussian Splatting representation. Candidate viewpoints are
-        sampled, filtered, and evaluated using the OctoMap and prior knowledge of the row layout and plant
-        height, then a graph-based planner selects the best viewpoints for the mobile manipulator to execute,
-        closing the active mapping loop.
+        <strong>System overview.</strong> Our framework integrates two semantic representations: a low-resolution OctoMap for collision-free motion planning, frontier extraction, and viewpoint evaluation, and a 3DGS representation for high-fidelity reconstruction. Candidate exploitation viewpoints are sampled around semantic clusters, while exploration viewpoints are sampled around frontier centroids and along crop rows. A graph-based planner determines the optimal sequence of viewpoints by considering information gain and actuation cost.
       </figcaption>
     </figure>
   </section>
 
   <section id="results">
     <h2 class="section-title">Results</h2>
+    <figure>
+      <img src="figures/merged_environments.png" alt="Simulation, laboratory, and real greenhouse environments, along with our simulated and physical mobile manipulator">
+      <figcaption>
+        <strong>Simulation, laboratory, and real greenhouse environments, along with our simulated and
+        physical mobile manipulator.</strong>
+      </figcaption>
+    </figure>
     <figure>
       <img src="figures/octomap_vs_ours.png" alt="Comparison of OctoSplat reconstructions against Semantic OctoMap under noiseless, segmentation noise, and segmentation plus depth noise conditions">
       <figcaption>
@@ -237,19 +224,19 @@
       </div>
       <div class="video-card">
         <video controls preload="metadata" src="videos/sim_sgs_g1_row3_ours.mp4"></video>
-        <figcaption>Active mapping in simulation</figcaption>
+        <figcaption>Gaussian Reconstruction in simulation</figcaption>
       </div>
       <div class="video-card">
         <video controls preload="metadata" src="videos/lab_sgs_scene7_ours_v2.mp4"></video>
-        <figcaption>Active mapping in a controlled laboratory environment</figcaption>
+        <figcaption>Gaussian Reconstruction in laboratory environment</figcaption>
       </div>
       <div class="video-card">
         <video controls preload="metadata" src="videos/real_sgs_scene1_ours.mp4"></video>
-        <figcaption>Active mapping in a real greenhouse — Scene 1</figcaption>
+        <figcaption>Gaussian Reconstruction in a real greenhouse — Scene 1</figcaption>
       </div>
       <div class="video-card">
         <video controls preload="metadata" src="videos/real_sgs_scene6_ours_v2.mp4"></video>
-        <figcaption>Active mapping in a real greenhouse — Scene 6</figcaption>
+        <figcaption>Gaussian Reconstruction in a real greenhouse — Scene 0</figcaption>
       </div>
     </div>
   </section>
